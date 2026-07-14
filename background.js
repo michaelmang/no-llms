@@ -58,10 +58,30 @@ function makeRule(domain, id) {
   };
 }
 
+function hostForDomain(domain) {
+  return domain.split("/")[0];
+}
+
+function originPatternsForDomain(domain) {
+  const host = hostForDomain(domain);
+  return [`http://${host}/*`, `https://${host}/*`];
+}
+
+async function hasHostPermission(domain) {
+  return chrome.permissions.contains({ origins: originPatternsForDomain(domain) });
+}
+
+async function getSavedDomains() {
+  const { domains } = await chrome.storage.local.get("domains");
+  return Array.isArray(domains) ? domains : DEFAULT_DOMAINS;
+}
+
 async function updateRules(domains) {
   const existingRules = await chrome.declarativeNetRequest.getDynamicRules();
   const validDomains = [...new Set(domains.map(normaliseDomain).filter(Boolean))];
-  const rules = validDomains.map((domain, index) => makeRule(domain, RULE_ID_START + index));
+  const permissionResults = await Promise.all(validDomains.map(hasHostPermission));
+  const protectedDomains = validDomains.filter((_, index) => permissionResults[index]);
+  const rules = protectedDomains.map((domain, index) => makeRule(domain, RULE_ID_START + index));
 
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: existingRules.map((rule) => rule.id),
@@ -69,12 +89,29 @@ async function updateRules(domains) {
   });
 
   await chrome.storage.local.set({ domains: validDomains });
-  return validDomains;
+  return { domains: validDomains, protectedDomains };
 }
 
 async function initialise() {
-  const { domains } = await chrome.storage.local.get("domains");
-  await updateRules(Array.isArray(domains) ? domains : DEFAULT_DOMAINS);
+  await updateRules(await getSavedDomains());
+}
+
+async function removeDomain(domain) {
+  const normalised = normaliseDomain(domain);
+  const domains = await getSavedDomains();
+  const remainingDomains = normalised ? domains.filter((entry) => entry !== normalised) : domains;
+  const result = await updateRules(remainingDomains);
+
+  let accessRemoved = false;
+  if (normalised) {
+    const host = hostForDomain(normalised);
+    const hostIsStillUsed = result.domains.some((entry) => hostForDomain(entry) === host);
+    if (!hostIsStillUsed && await hasHostPermission(normalised)) {
+      accessRemoved = await chrome.permissions.remove({ origins: originPatternsForDomain(normalised) });
+    }
+  }
+
+  return { ...result, accessRemoved };
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -85,24 +122,57 @@ chrome.runtime.onStartup.addListener(() => {
   initialise().catch(console.error);
 });
 
+chrome.permissions.onAdded.addListener(() => {
+  initialise().catch(console.error);
+});
+
+chrome.permissions.onRemoved.addListener(() => {
+  initialise().catch(console.error);
+});
+
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === "getDomains") {
-    chrome.storage.local.get("domains").then(({ domains }) => {
-      sendResponse({ domains: domains || DEFAULT_DOMAINS });
-    });
+    getSavedDomains().then((domains) => sendResponse({ domains }));
+    return true;
+  }
+
+  if (message.type === "getStatus") {
+    getSavedDomains()
+      .then(async (domains) => {
+        const permissionResults = await Promise.all(domains.map(hasHostPermission));
+        sendResponse({
+          domains,
+          protectedDomains: domains.filter((_, index) => permissionResults[index])
+        });
+      })
+      .catch((error) => sendResponse({ ok: false, error: error.message }));
     return true;
   }
 
   if (message.type === "saveDomains") {
     updateRules(message.domains || [])
-      .then((domains) => sendResponse({ ok: true, domains }))
+      .then(({ domains, protectedDomains }) => sendResponse({ ok: true, domains, protectedDomains }))
+      .catch((error) => sendResponse({ ok: false, error: error.message }));
+    return true;
+  }
+
+  if (message.type === "syncRules") {
+    initialise()
+      .then(() => sendResponse({ ok: true }))
+      .catch((error) => sendResponse({ ok: false, error: error.message }));
+    return true;
+  }
+
+  if (message.type === "removeDomain") {
+    removeDomain(message.domain)
+      .then(({ domains, protectedDomains, accessRemoved }) => sendResponse({ ok: true, domains, protectedDomains, accessRemoved }))
       .catch((error) => sendResponse({ ok: false, error: error.message }));
     return true;
   }
 
   if (message.type === "restoreDefaults") {
     updateRules(DEFAULT_DOMAINS)
-      .then((domains) => sendResponse({ ok: true, domains }))
+      .then(({ domains, protectedDomains }) => sendResponse({ ok: true, domains, protectedDomains }))
       .catch((error) => sendResponse({ ok: false, error: error.message }));
     return true;
   }

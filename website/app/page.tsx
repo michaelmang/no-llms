@@ -13,12 +13,12 @@ const blockedSites = [
 
 const steps = [
   {
-    title: "Load unpacked",
-    body: "Open chrome://extensions, turn on Developer mode, then Load unpacked and select the extension folder.",
+    title: "Enable protection",
+    body: "Click Enable protection in the extension popup. Chrome asks for access only to the sites on the default blocklist.",
   },
   {
     title: "Customize the blocklist",
-    body: "Open the extension's Details page, then Extension options, to add or remove any domain or domain/path.",
+    body: "Open Extension options to add or remove any domain or domain/path. Chrome asks before an added site is blocked.",
   },
   {
     title: "Browse without the noise",
@@ -76,7 +76,7 @@ export default function Home() {
         <section className="border-t border-border bg-white">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="text-sm font-bold uppercase tracking-[0.08em] text-accent">
-              Blocked by default
+              Ready to block
             </h2>
             <div className="mt-5 flex flex-wrap gap-2">
               {blockedSites.map((site) => (
@@ -88,8 +88,11 @@ export default function Home() {
                 </span>
               ))}
               <span className="rounded-full border border-border px-4 py-1.5 text-sm font-medium text-muted">
-                + any domain you add
-              </span>
+              + any domain you add
+            </span>
+            <p className="w-full pt-2 text-[15px] leading-6 text-muted">
+              The default list becomes active only when you click Enable protection. The extension requests access only to sites you approve.
+            </p>
             </div>
           </div>
         </section>

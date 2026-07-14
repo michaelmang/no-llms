@@ -38,4 +38,7 @@ button:hover { background: #802019; }
 .popup { padding: 28px; text-align: center; }
 .popup h1 { font-size: 27px; }
 .popup p:not(.eyebrow) { margin: 10px 0 22px; }
+.popup button + button { margin-top: 10px; }
+.popup #open-settings { background: transparent; color: #7d241d; border: 1px solid #c5a7a1; }
+.popup #open-settings:hover { background: #f7e9e6; }
 .shield { display: grid; width: 48px; height: 48px; place-items: center; margin: 0 auto 14px; border-radius: 50%; background: #a02c23; color: #fff; font-size: 34px; font-weight: 300; line-height: 1; }

@@ -9,9 +9,10 @@
   <body class="popup-body">
     <main class="popup">
       <div class="shield" aria-hidden="true">×</div>
-      <p class="eyebrow">Protection active</p>
-      <h1>LLM sites are blocked</h1>
+      <p id="protection-status" class="eyebrow">Checking protection…</p>
+      <h1 id="protection-title">Preparing your blocklist</h1>
       <p id="count">Loading blocklist…</p>
+      <button id="enable-protection" type="button" hidden>Enable protection</button>
       <button id="open-settings" type="button">Manage blocked websites</button>
     </main>
     <script src="popup.js"></script>

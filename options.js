@@ -16,6 +16,11 @@ function normalise(value) {
   return value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split(/[?#]/)[0].replace(/\/$/, "");
 }
 
+function originPatternsForDomain(domain) {
+  const host = domain.split("/")[0];
+  return [`http://${host}/*`, `https://${host}/*`];
+}
+
 function render() {
   list.replaceChildren();
   domains.forEach((domain) => {
@@ -26,9 +31,17 @@ function render() {
     remove.type = "button";
     remove.className = "remove";
     remove.textContent = "Remove";
-    remove.addEventListener("click", () => {
-      domains = domains.filter((entry) => entry !== domain);
-      save();
+    remove.addEventListener("click", async () => {
+      const response = await chrome.runtime.sendMessage({ type: "removeDomain", domain });
+      if (!response.ok) {
+        status.textContent = `Could not remove: ${response.error}`;
+        return;
+      }
+      domains = response.domains;
+      render();
+      status.textContent = response.accessRemoved
+        ? `${domain} was removed. Chrome access to that site was also removed.`
+        : `${domain} was removed.`;
     });
     item.append(label, remove);
     list.append(item);
@@ -58,6 +71,13 @@ form.addEventListener("submit", async (event) => {
     error.textContent = "That website is already blocked.";
     return;
   }
+
+  const granted = await chrome.permissions.request({ origins: originPatternsForDomain(domain) });
+  if (!granted) {
+    error.textContent = "Chrome permission is needed to block that website.";
+    return;
+  }
+
   domains.push(domain);
   await save(`${domain} is now blocked.`);
   input.value = "";
@@ -65,6 +85,20 @@ form.addEventListener("submit", async (event) => {
 });
 
 restoreButton.addEventListener("click", async () => {
+  const defaultDomains = [
+    "chatgpt.com", "chat.openai.com", "claude.ai", "gemini.google.com", "aistudio.google.com",
+    "copilot.microsoft.com", "bing.com/chat", "perplexity.ai", "poe.com", "grok.com", "x.ai",
+    "mistral.ai/chat", "lechat.mistral.ai", "meta.ai", "character.ai", "you.com", "pi.ai",
+    "deepseek.com", "chat.deepseek.com", "huggingface.co/chat"
+  ];
+  const granted = await chrome.permissions.request({
+    origins: defaultDomains.flatMap(originPatternsForDomain)
+  });
+  if (!granted) {
+    status.textContent = "Default protection was not enabled, so your blocklist was unchanged.";
+    return;
+  }
+
   const response = await chrome.runtime.sendMessage({ type: "restoreDefaults" });
   if (!response.ok) {
     status.textContent = `Could not restore defaults: ${response.error}`;
@@ -72,7 +106,7 @@ restoreButton.addEventListener("click", async () => {
   }
   domains = response.domains;
   render();
-  status.textContent = "Default blocklist restored.";
+  status.textContent = "Default blocklist restored and enabled.";
 });
 
 chrome.runtime.sendMessage({ type: "getDomains" }).then((response) => {

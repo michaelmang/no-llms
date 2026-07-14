@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">Information stored locally</h2>
-            <p className="mt-3">Your custom blocklist is stored locally in Chrome extension storage. It is used only to create the redirect rules for websites you choose to block.</p>
+            <p className="mt-3">Your selected blocklist is stored locally in Chrome extension storage. It is used only to create the redirect rules for websites you choose to block.</p>
           </section>
 
           <section>
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">Permissions</h2>
-            <p className="mt-3">The extension uses Chrome’s declarative network request permission only to redirect websites on the default or user-created blocklist. Its storage permission is used only for the local blocklist. It does not inject scripts into unrelated pages or collect their contents.</p>
+            <p className="mt-3">The extension uses Chrome’s declarative network request permission only to redirect websites on the approved blocklist. It does not request access to all websites when installed. Instead, Chrome requests optional access only when you click Enable protection for the default list or add a custom domain in Extension Options. If a host is removed from the blocklist, the extension removes its optional access when no remaining entry uses that host. Storage permission is used only for the local blocklist. The extension does not inject scripts into unrelated pages or collect their contents.</p>
           </section>
 
           <section>
