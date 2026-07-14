@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>No AI — Stay Human</title>
+  <rect width="128" height="128" rx="24" fill="#dfd4ba"/>
+  <circle cx="64" cy="64" r="47" fill="#f7f1df" stroke="#526343" stroke-width="5"/>
+  <path d="M63 91c-4-23 3-42 25-56" fill="none" stroke="#526343" stroke-linecap="round" stroke-width="7"/>
+  <path d="M67 56C42 56 35 40 41 28c15-1 27 9 26 28Z" fill="#6d8058"/>
+  <path d="M70 69c4-23 20-29 33-22 0 16-12 25-33 22Z" fill="#526343"/>
+  <path d="M59 76C40 76 29 64 31 50c16-4 30 7 28 26Z" fill="#526343"/>
+  <path d="M39 105h50" stroke="#526343" stroke-linecap="round" stroke-width="5"/>
+</svg>

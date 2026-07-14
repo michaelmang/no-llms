@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>No AI promo artwork</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      body { color: #34402c; background: #dfd4ba; font-family: Baskerville, "Iowan Old Style", Palatino, Georgia, serif; }
+      .promo { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; width: 100%; height: 100%; overflow: hidden; background-color: #dfd4ba; background-image: radial-gradient(rgb(77 71 49 / 12%) .7px, transparent .9px), radial-gradient(rgb(255 255 255 / 45%) .7px, transparent .9px); background-position: 0 0, 7px 9px; background-size: 15px 15px, 21px 21px; }
+      .copy { z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 8.5% 6% 9% 11%; }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; color: #526343; font-size: 17px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+      .mark { display: grid; width: 43px; height: 43px; place-items: center; overflow: hidden; border: 2px solid #526343; border-radius: 50%; background: #f7f1df; }
+      .mark img { width: 100%; height: 100%; }
+      h1 { max-width: 660px; margin: 0 0 18px; font-size: clamp(45px, 5.3vw, 84px); font-weight: 400; letter-spacing: -.07em; line-height: .84; }
+      p { max-width: 530px; margin: 0; font-size: clamp(17px, 1.6vw, 25px); line-height: 1.25; }
+      .rule { width: 150px; height: 2px; margin: 30px 0 18px; background: #71835c; }
+      .motto { color: #60714e; font-size: 16px; font-style: italic; letter-spacing: .1em; }
+      .art { position: relative; align-self: end; height: 100%; }
+      .art img { position: absolute; border: 9px solid #fffdf7; background: #fffdf7; box-shadow: 0 6px 16px rgb(52 45 30 / 22%); object-fit: cover; }
+      .one { z-index: 3; width: 36%; height: 64%; right: 8%; bottom: -7%; transform: rotate(4deg); }
+      .two { z-index: 2; width: 36%; height: 53%; right: 35%; bottom: -5%; transform: rotate(-6deg); }
+      .three { z-index: 1; width: 33%; height: 49%; right: 1%; bottom: 22%; transform: rotate(-10deg); }
+      @media (max-width: 600px) {
+        .promo { display: block; }
+        .copy { position: relative; height: 100%; padding: 12% 10%; }
+        .brand { gap: 7px; margin-bottom: 16px; font-size: 10px; }
+        .mark { width: 28px; height: 28px; border-width: 1px; }
+        h1 { max-width: 290px; margin-bottom: 11px; font-size: 49px; }
+        p { max-width: 265px; font-size: 15px; }
+        .rule { width: 70px; margin: 17px 0 10px; }
+        .motto { font-size: 11px; }
+        .art { position: absolute; inset: 0; opacity: .42; }
+        .art img { border-width: 4px; }
+        .one { width: 35%; height: 52%; right: -7%; bottom: -9%; }
+        .two { width: 35%; height: 47%; right: 21%; bottom: -20%; }
+        .three { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="promo">
+      <section class="copy">
+        <div class="brand"><span class="mark"><img src="../icons/no-ai.svg" alt=""></span> No AI</div>
+        <h1>No AI.<br>Stay Human.</h1>
+        <p>Block LLM sites. Return to art, music, and attention.</p>
+        <div class="rule"></div>
+        <span class="motto">nihil sine labore</span>
+      </section>
+      <section class="art" aria-hidden="true">
+        <img class="one" src="../assets/art-7.jpg" alt="">
+        <img class="two" src="../assets/art-4.jpg" alt="">
+        <img class="three" src="../assets/art-8.jpg" alt="">
+      </section>
+    </main>
+  </body>
+</html>

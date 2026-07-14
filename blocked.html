@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A quieter corner</title>
+    <link rel="stylesheet" href="blocked.css">
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <div class="brand-row">
+          <blockquote>
+            <p>“In the era of artificial intelligence, when human dignity is threatened by new forms of dehumanization, ours is the pressing duty to remain profoundly human.”</p>
+            <cite>— <a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html#The_res_novae_of_our_time" target="_blank" rel="noreferrer">MAGNIFICA HUMANITAS</a></cite>
+          </blockquote>
+        </div>
+        <div class="radio">
+          <div>
+            <strong>Radio Swiss Classic</strong>
+          </div>
+          <button id="radio-toggle" type="button">Play radio</button>
+        </div>
+      </header>
+
+      <section class="gallery-shell">
+        <div class="gallery-actions">
+          <button id="refresh-gallery" class="refresh-button" type="button" aria-label="Refresh artworks" title="Refresh artworks">↻</button>
+        </div>
+        <div id="gallery" class="gallery" aria-live="polite" aria-busy="true">
+          <p class="loading">Hanging today’s works…</p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Artworks from the Art Institute of Chicago’s public-domain collection.</p>
+      <p>Music courtesy of Radio Swiss Classic.</p>
+    </footer>
+    <audio id="radio" preload="none" src="https://stream.srg-ssr.ch/srgssr/rsc_de/mp3/128"></audio>
+    <script src="blocked.js"></script>
+  </body>
+</html>

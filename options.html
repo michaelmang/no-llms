@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>No LLM Sites — Settings</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="settings">
+      <section class="hero">
+        <p class="eyebrow">No LLM Sites</p>
+        <h1>Blocked websites</h1>
+        <p>These sites are blocked in every Chrome tab. Add a domain or a domain/path, such as <code>example.com</code> or <code>example.com/chat</code>.</p>
+      </section>
+
+      <form id="add-form" class="add-domain">
+        <label for="domain">Website to block</label>
+        <div class="add-row">
+          <input id="domain" name="domain" type="text" autocomplete="off" placeholder="llm.example.com" required>
+          <button type="submit">Add</button>
+        </div>
+        <p id="form-error" class="error" role="alert"></p>
+      </form>
+
+      <section aria-labelledby="list-heading">
+        <div class="section-header">
+          <h2 id="list-heading">Blocklist</h2>
+          <button id="restore-defaults" class="secondary" type="button">Restore defaults</button>
+        </div>
+        <ul id="domain-list" class="domain-list" aria-live="polite"></ul>
+      </section>
+
+      <p id="save-status" class="status" aria-live="polite"></p>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
