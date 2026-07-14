@@ -162,7 +162,12 @@ export default function Home() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-3xl flex-col gap-1 px-6 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>No LLM Sites — a Chrome extension.</p>
-          <p>Artworks from public-domain museum collections.</p>
+          <div className="flex items-center gap-4">
+            <p>Artworks from public-domain museum collections.</p>
+            <a href="/privacy" className="font-medium underline underline-offset-4 transition-colors hover:text-accent">
+              Privacy Policy
+            </a>
+          </div>
         </div>
       </footer>
     </div>
