@@ -2,7 +2,7 @@
 
 ## Description
 
-Take a deliberate break from LLM websites. No AI redirects selected AI chat services and any sites you add to a garden-inspired gallery of public-domain art with Radio Swiss Classic. Enable the default blocklist from the extension popup, or add individual sites in Extension Options. Chrome asks for permission only for the sites you choose to block.
+Take a deliberate break from LLM websites. No AI redirects selected AI chat services and any sites you add to a garden-inspired gallery of public-domain art with Radio Swiss Classic. Enable the default blocklist from the extension popup, add individual sites, or opt into the reviewed LLM/chat collection. Set weekday focus hours so blocking automatically pauses when you are off the clock. Chrome asks for permission only for the sites you choose to block.
 
 ## Category
 
@@ -22,9 +22,13 @@ Used to create local redirect rules for websites the user has explicitly approve
 
 Used only to save the user's selected blocklist locally in Chrome. It persists sites approved from the default list or added in Extension Options so their local redirect rules can be rebuilt after Chrome restarts. No personal data is collected or transmitted.
 
+### alarms
+
+Used only to activate or pause local redirect rules at the user’s selected focus-schedule times. No browsing data is read, collected, or transmitted.
+
 ### Optional host permissions
 
-Requested at runtime only after a user clicks Enable protection or adds a domain in Extension Options. Each request is limited to the specific site or sites the user chose to block. The extension does not request access to all websites at installation, and removes optional access when a host is no longer on the blocklist.
+Requested at runtime only after a user clicks Enable protection, adds a domain in Extension Options, or enables the optional curated LLM/chat collection. Each request is limited to the specific site or sites the user chose to block, plus their subdomains only when the user enables the related-subdomains setting. The curated collection is bundled and reviewed with each release; it is not fetched remotely. The extension does not request access to all websites at installation, and removes optional access when a host is no longer on the blocklist.
 
 ### Remote code
 

@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "No LLM Sites",
-  "version": "1.1.0",
-  "description": "Blocks selected LLM websites and domains you explicitly add.",
-  "permissions": ["declarativeNetRequestWithHostAccess", "storage"],
+  "version": "1.2.0",
+  "description": "Blocks selected LLM chat sites on your schedule.",
+  "permissions": ["declarativeNetRequestWithHostAccess", "storage", "alarms"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "service_worker": "background.js",

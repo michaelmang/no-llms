@@ -18,11 +18,11 @@ const steps = [
   },
   {
     title: "Customize the blocklist",
-    body: "Open Extension options to add or remove any domain or domain/path. Chrome asks before an added site is blocked.",
+    body: "Add any domain, enable the reviewed LLM/chat collection, and choose whether related subdomains are included.",
   },
   {
-    title: "Browse without the noise",
-    body: "Visiting a blocked site redirects you to a gallery of public-domain art instead, with Radio Swiss Classic playing in the background.",
+    title: "Set your focus hours",
+    body: "Block during the weekday hours you choose, then let the rules pause automatically for evenings and weekends.",
   },
 ];
 
@@ -88,11 +88,11 @@ export default function Home() {
                 </span>
               ))}
               <span className="rounded-full border border-border px-4 py-1.5 text-sm font-medium text-muted">
-              + any domain you add
-            </span>
-            <p className="w-full pt-2 text-[15px] leading-6 text-muted">
-              The default list becomes active only when you click Enable protection. The extension requests access only to sites you approve.
-            </p>
+                + a reviewed LLM/chat collection
+              </span>
+              <p className="w-full pt-2 text-[15px] leading-6 text-muted">
+                The default list becomes active only when you click Enable protection. Add a focus schedule, related subdomains, or the optional community-maintained LLM/chat collection whenever you need them.
+              </p>
             </div>
           </div>
         </section>

@@ -20,8 +20,9 @@ code { border-radius: 5px; background: #ecece7; padding: 2px 5px; font-size: .9e
 .add-domain { padding: 30px 0; }
 label { display: block; margin-bottom: 8px; font-weight: 650; }
 .add-row { display: flex; gap: 10px; }
-input { flex: 1; min-width: 0; padding: 11px 12px; border: 1px solid #b9b9b2; border-radius: 7px; background: #fff; }
-input:focus { outline: 3px solid #f0c5bd; border-color: #a02c23; }
+input:not([type="checkbox"]) { flex: 1; min-width: 0; padding: 11px 12px; border: 1px solid #b9b9b2; border-radius: 7px; background: #fff; }
+input:not([type="checkbox"]):focus { outline: 3px solid #f0c5bd; border-color: #a02c23; }
+input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: #a02c23; }
 button { border: 0; border-radius: 7px; padding: 10px 15px; background: #a02c23; color: #fff; font-weight: 700; }
 button:hover { background: #802019; }
 .secondary, .remove { background: transparent; color: #7d241d; border: 1px solid #c5a7a1; }
@@ -33,6 +34,18 @@ button:hover { background: #802019; }
 .remove { flex: 0 0 auto; padding: 6px 10px; font-size: 13px; }
 .error { min-height: 1.4em; margin: 7px 0 0; color: #a02c23; font-size: 14px; }
 .status { min-height: 1.4em; color: #236b43; font-size: 14px; }
+.settings-section { border-top: 1px solid #dcdcd5; padding: 28px 0; }
+.toggle-row { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; font-weight: 500; }
+.toggle-row span { line-height: 1.35; }
+.setting-note { margin: 9px 0 0 26px; font-size: 14px; }
+.schedule-controls { margin: 16px 0 0 26px; }
+.time-row { display: grid; grid-template-columns: auto minmax(0, 150px) auto minmax(0, 150px); align-items: center; gap: 8px; }
+.time-row label { margin: 0; font-size: 14px; }
+.time-row input { width: 100%; }
+.day-picker { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 16px 0 0; padding: 0; border: 0; }
+.day-picker legend { width: 100%; margin-bottom: 7px; font-size: 14px; font-weight: 650; }
+.day-picker legend span { color: #515159; font-weight: 400; }
+.day-picker label { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 14px; font-weight: 500; }
 
 .popup-body { width: 320px; background: #f7f7f5; }
 .popup { padding: 28px; text-align: center; }
@@ -42,3 +55,9 @@ button:hover { background: #802019; }
 .popup #open-settings { background: transparent; color: #7d241d; border: 1px solid #c5a7a1; }
 .popup #open-settings:hover { background: #f7e9e6; }
 .shield { display: grid; width: 48px; height: 48px; place-items: center; margin: 0 auto 14px; border-radius: 50%; background: #a02c23; color: #fff; font-size: 34px; font-weight: 300; line-height: 1; }
+
+@media (max-width: 520px) {
+  .settings { padding-inline: 20px; }
+  .time-row { grid-template-columns: auto minmax(0, 1fr); }
+  .time-row label:nth-of-type(2) { margin-top: 6px; }
+}

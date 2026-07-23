@@ -23,6 +23,50 @@
         <p id="form-error" class="error" role="alert"></p>
       </form>
 
+      <section class="settings-section" aria-labelledby="focus-heading">
+        <h2 id="focus-heading">Focus schedule</h2>
+        <label class="toggle-row" for="schedule-enabled">
+          <input id="schedule-enabled" type="checkbox">
+          <span>Block only during selected hours</span>
+        </label>
+        <div id="schedule-controls" class="schedule-controls" hidden>
+          <div class="time-row">
+            <label for="schedule-start">From</label>
+            <input id="schedule-start" type="time" value="09:00">
+            <label for="schedule-end">To</label>
+            <input id="schedule-end" type="time" value="17:00">
+          </div>
+          <fieldset class="day-picker">
+            <legend>Days <span>(uses your computer’s local time)</span></legend>
+            <label><input type="checkbox" name="schedule-day" value="1"> Mon</label>
+            <label><input type="checkbox" name="schedule-day" value="2"> Tue</label>
+            <label><input type="checkbox" name="schedule-day" value="3"> Wed</label>
+            <label><input type="checkbox" name="schedule-day" value="4"> Thu</label>
+            <label><input type="checkbox" name="schedule-day" value="5"> Fri</label>
+            <label><input type="checkbox" name="schedule-day" value="6"> Sat</label>
+            <label><input type="checkbox" name="schedule-day" value="0"> Sun</label>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="settings-section" aria-labelledby="collection-heading">
+        <h2 id="collection-heading">LLM/chat collection</h2>
+        <label class="toggle-row" for="curated-enabled">
+          <input id="curated-enabled" type="checkbox">
+          <span>Block the community-maintained LLM/chat collection</span>
+        </label>
+        <p id="curated-description" class="setting-note">A reviewed list is bundled with each extension release; enabling it asks Chrome only for those sites.</p>
+      </section>
+
+      <section class="settings-section" aria-labelledby="subdomain-heading">
+        <h2 id="subdomain-heading">Related subdomains</h2>
+        <label class="toggle-row" for="include-subdomains">
+          <input id="include-subdomains" type="checkbox">
+          <span>Also block subdomains of selected sites</span>
+        </label>
+        <p class="setting-note">For example, blocking <code>example.com</code> also blocks <code>chat.example.com</code>.</p>
+      </section>
+
       <section aria-labelledby="list-heading">
         <div class="section-header">
           <h2 id="list-heading">Blocklist</h2>
@@ -33,6 +77,6 @@
 
       <p id="save-status" class="status" aria-live="polite"></p>
     </main>
-    <script src="options.js"></script>
+    <script type="module" src="options.js"></script>
   </body>
 </html>

@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
           No LLM Sites
         </p>
         <h1 className="text-[clamp(32px,6vw,52px)] font-semibold tracking-tight">Privacy Policy</h1>
-        <p className="mt-3 text-sm text-muted">Effective July 14, 2026</p>
+        <p className="mt-3 text-sm text-muted">Effective July 23, 2026</p>
 
         <div className="mt-12 max-w-2xl space-y-10 text-[16px] leading-7 text-muted">
           <p>
@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">Information stored locally</h2>
-            <p className="mt-3">Your selected blocklist is stored locally in Chrome extension storage. It is used only to create the redirect rules for websites you choose to block.</p>
+            <p className="mt-3">Your selected blocklist, focus schedule, related-subdomain preference, and whether you enabled the optional LLM/chat collection are stored locally in Chrome extension storage. They are used only to create the redirect rules you choose.</p>
           </section>
 
           <section>
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground">Permissions</h2>
-            <p className="mt-3">The extension uses Chrome’s declarative network request permission only to redirect websites on the approved blocklist. It does not request access to all websites when installed. Instead, Chrome requests optional access only when you click Enable protection for the default list or add a custom domain in Extension Options. If a host is removed from the blocklist, the extension removes its optional access when no remaining entry uses that host. Storage permission is used only for the local blocklist. The extension does not inject scripts into unrelated pages or collect their contents.</p>
+            <p className="mt-3">The extension uses Chrome’s declarative network request permission only to redirect websites on the approved blocklist. It does not request access to all websites when installed. Instead, Chrome requests optional access only when you click Enable protection, add a custom domain, or enable the optional LLM/chat collection. The collection is bundled with the extension release; it is not remotely downloaded or changed. Chrome alarms are used only to activate and pause blocking at the focus-schedule times you select. If a host is removed from the blocklist, the extension removes its optional access when no remaining entry uses that host. The extension does not inject scripts into unrelated pages or collect their contents.</p>
           </section>
 
           <section>
